@@ -1,4 +1,5 @@
 package com.epam.lab.app.dataBaseInteraction;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,10 +20,12 @@ public class DataBaseCreator {
 	private void create() {
 		try {
 			Statement statement = connection.createStatement();
-			String createDatabase = "CREATE DATABASE IF NOT EXISTS `university`";
-			statement.executeUpdate(createDatabase);
-			createTables();
-			fillTables();
+			int databaseCheck = statement.executeUpdate("SHOW DATABASES LIKE 'university'");
+			if (databaseCheck != -1) {
+				statement.executeUpdate("CREATE DATABASE IF NOT EXISTS `university`");
+				createTables();	
+				fillTables();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
