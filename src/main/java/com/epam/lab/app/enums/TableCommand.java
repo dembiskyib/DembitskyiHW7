@@ -1,6 +1,6 @@
 package com.epam.lab.app.enums;
 
-public enum TableCommand {
+public enum TableCommand implements Command {
 	CREATE(1, "Create new row"), READ(2, "Read all"), UPDATE(3, "Update row"), DELETE(4, "Delete row"), EXIT(5,
 			"Exit"), DEFAULT();
 

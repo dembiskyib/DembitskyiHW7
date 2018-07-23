@@ -2,21 +2,40 @@ package com.epam.lab.app.model;
 
 import java.sql.Date;
 
+import com.epam.lab.app.annotations.Field;
+import com.epam.lab.app.annotations.Table;
+
+@Table
 public class Student {
+	@Field
 	private int studentId;
+	@Field
 	private String secondName;
+	@Field
 	private String firstName;
+	@Field
 	private String patronymic;
+	@Field
 	private String motherFullName;
+	@Field
 	private String fatherFullName;
+	@Field
 	private String address;
+	@Field
 	private String phone;
+	@Field
 	private String passportData;
+	@Field
 	private int recordBookNumber;
+	@Field
 	private Date startDate;
+	@Field
 	private String group;
+	@Field
 	private int year;
+	@Field
 	private int specialityId;
+	@Field
 	private boolean onExtramural;
 
 	public Student() {

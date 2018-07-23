@@ -17,13 +17,24 @@ public class DataBaseCreator {
 		scanner = new Scanner(System.in);
 	}
 
+	public void login() {
+		logger.info("Print database port:");
+		ConnectionFactory.portNumber = scanner.nextInt();
+		logger.info("Print login:");
+		ConnectionFactory.login = scanner.next();
+		logger.info("Print password:");
+		ConnectionFactory.password = scanner.next();
+		connection = ConnectionFactory.getConnection();
+		create();
+	}
+
 	private void create() {
 		try {
 			Statement statement = connection.createStatement();
 			int databaseCheck = statement.executeUpdate("SHOW DATABASES LIKE 'university'");
 			if (databaseCheck != -1) {
 				statement.executeUpdate("CREATE DATABASE IF NOT EXISTS `university`");
-				createTables();	
+				createTables();
 				fillTables();
 			}
 		} catch (SQLException e) {
@@ -73,19 +84,24 @@ public class DataBaseCreator {
 		fillGrade();
 	}
 
-	public void fillCourse() {
+	private void fillCourse() {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("INSERT INTO `course` (`courseId`,`courseName`,`courseDescription`,`specialityId`) "
-					+ "VALUES (103,'Mathematical Foundations of Computing','Mathematical foundations required for computer science, including propositional predicate logic, induction, sets, functions, and relations',50101)");
+					+ "VALUES (103,'Mathematical Foundations of Computing','Mathematical foundations required for computer science, "
+					+ "including propositional predicate logic, induction, sets, functions, and relations',50101)");
 			statement.executeUpdate("INSERT INTO `course` (`courseId`,`courseName`,`courseDescription`,`specialityId`) "
 					+ "VALUES (166,'Data Structures','Techniques in the design, analysis, and implementation of data structures.',50102)");
 			statement.executeUpdate("INSERT INTO `course` (`courseId`,`courseName`,`courseDescription`,`specialityId`) "
-					+ "VALUES (221,'Artificial Intelligence: Principles and Techniques','Artificial intelligence (AI) has had a huge impact in many areas, including medical diagnosis, speech recognition, robotics, web search, advertising, and scheduling.',50101)");
+					+ "VALUES (221,'Artificial Intelligence: Principles and Techniques','Artificial intelligence (AI) "
+					+ "has had a huge impact in many areas, including medical diagnosis, speech recognition, robotics, "
+					+ "web search, advertising, and scheduling.',50101)");
 			statement.executeUpdate("INSERT INTO `course` (`courseId`,`courseName`,`courseDescription`,`specialityId`) "
-					+ "VALUES (224,'Analysis of Networks','Networks are a fundamental tool for modeling complex social, technological, and biological systems.',50102)");
+					+ "VALUES (224,'Analysis of Networks','Networks are a fundamental tool for modeling complex social, "
+					+ "technological, and biological systems.',50102)");
 			statement.executeUpdate("INSERT INTO `course` (`courseId`,`courseName`,`courseDescription`,`specialityId`) "
-					+ "VALUES (229,'Machine Learning','Topics: statistical pattern recognition, linear and non-linear regression, non-parametric methods, exponential family',50102)");
+					+ "VALUES (229,'Machine Learning','Topics: statistical pattern recognition, linear and non-linear "
+					+ "regression, non-parametric methods, exponential family',50102)");
 			statement.executeUpdate("INSERT INTO `course` (`courseId`,`courseName`,`courseDescription`,`specialityId`) "
 					+ "VALUES (231,'Computer Vision','An introduction to the concepts and applications in computer vision.',50101)");
 		} catch (SQLException e) {
@@ -93,7 +109,7 @@ public class DataBaseCreator {
 		}
 	}
 
-	public void fillGrade() {
+	private void fillGrade() {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(
@@ -119,19 +135,25 @@ public class DataBaseCreator {
 		}
 	}
 
-	public void fillSpeciality() {
+	private void fillSpeciality() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.executeUpdate(
-					"INSERT INTO `speciality` (`specialityId`,`specialityName`,`specialityDescription`) VALUES (50101,'Computer-Aided Design','The study of Computer Science and Information Technology provides training of the highly qualified specialists in the field of programming, automated design, and complicated systems development.')");
-			statement.executeUpdate(
-					"INSERT INTO `speciality` (`specialityId`,`specialityName`,`specialityDescription`) VALUES (50102,'Information Systems and Networks','he reason of the department creation was the organizational and structural design of the new young scientific school on problems of databases, data and knowledge banks.')");
+			statement
+					.executeUpdate("INSERT INTO `speciality` (`specialityId`,`specialityName`,`specialityDescription`) "
+							+ "VALUES (50101,'Computer-Aided Design','The study of Computer Science and Information Technology provides "
+							+ "training of the highly qualified specialists in the field of programming, automated design, and complicated "
+							+ "systems development.')");
+			statement
+					.executeUpdate("INSERT INTO `speciality` (`specialityId`,`specialityName`,`specialityDescription`) "
+							+ "VALUES (50102,'Information Systems and Networks','he reason of the department creation was the "
+							+ "organizational and structural design of the new young scientific school on problems of databases, data "
+							+ "and knowledge banks.')");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void fillStudent() {
+	private void fillStudent() {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(
@@ -152,16 +174,5 @@ public class DataBaseCreator {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void login() {
-		logger.info("Print database port:");
-		ConnectionFactory.portNumber = scanner.nextInt();
-		logger.info("Print login:");
-		ConnectionFactory.login = scanner.next();
-		logger.info("Print password:");
-		ConnectionFactory.password = scanner.next();
-		connection = ConnectionFactory.getConnection();
-		create();
 	}
 }

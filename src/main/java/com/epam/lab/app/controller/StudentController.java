@@ -12,8 +12,8 @@ import com.epam.lab.app.util.DateFormatter;
 
 public class StudentController implements TableController {
 	private static final Logger logger = LogManager.getLogger(SpecialityController.class);
-	StudentService studentService;
-	Scanner scanner;
+	private StudentService studentService;
+	private Scanner scanner;
 
 	public StudentController() {
 		studentService = new StudentService();

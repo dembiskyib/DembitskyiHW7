@@ -12,8 +12,8 @@ import com.epam.lab.app.util.DateFormatter;
 
 public class GradeController implements TableController {
 	private static final Logger logger = LogManager.getLogger(GradeController.class);
-	GradeService gradeService;
-	Scanner scanner;
+	private GradeService gradeService;
+	private Scanner scanner;
 
 	public GradeController() {
 		gradeService = new GradeService();

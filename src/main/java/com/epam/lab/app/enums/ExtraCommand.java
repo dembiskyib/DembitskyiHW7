@@ -1,6 +1,6 @@
 package com.epam.lab.app.enums;
 
-public enum ExtraCommand {
+public enum ExtraCommand implements Command {
 	COURSES_BY_SPECIALITY(1, "Print all speciality courses"), DELETE_ALL_GRADES(2,
 			"Delete all student grades"), DELETE_WITH_TRANSFER(3,
 					"Delete speciality with students transfer (task3)"), INCREASE_YEAR(4,

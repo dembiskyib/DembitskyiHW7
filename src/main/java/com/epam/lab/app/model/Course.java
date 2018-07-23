@@ -1,9 +1,17 @@
 package com.epam.lab.app.model;
 
+import com.epam.lab.app.annotations.Field;
+import com.epam.lab.app.annotations.Table;
+
+@Table
 public class Course {
+	@Field
 	private int courseId;
+	@Field
 	private String courseName;
+	@Field
 	private String courseDescription;
+	@Field
 	private int specialityId;
 
 	public Course() {

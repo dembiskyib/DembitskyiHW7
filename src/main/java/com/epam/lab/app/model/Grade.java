@@ -2,10 +2,18 @@ package com.epam.lab.app.model;
 
 import java.sql.Date;
 
+import com.epam.lab.app.annotations.Field;
+import com.epam.lab.app.annotations.Table;
+
+@Table
 public class Grade {
+	@Field
 	private int studentId;
+	@Field
 	private int courseId;
+	@Field
 	private Date examDate;
+	@Field
 	private int grade;
 
 	public Grade() {

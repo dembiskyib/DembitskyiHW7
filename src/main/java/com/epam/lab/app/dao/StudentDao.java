@@ -9,20 +9,20 @@ import java.util.List;
 
 import com.epam.lab.app.dataBaseInteraction.ConnectionFactory;
 import com.epam.lab.app.model.Student;
-import com.epam.lab.app.transformer.StudentTransformer;
+import com.epam.lab.app.transformer.UniversalTransformer;
 
 public class StudentDao {
-	StudentTransformer studentTransformer;
+	UniversalTransformer<Student> universalTransformer;
 
 	public StudentDao() {
-		studentTransformer = new StudentTransformer();
+		universalTransformer = new UniversalTransformer<>();
 	}
 
 	public List<Student> getAll() {
 		Connection connection = ConnectionFactory.getConnection();
 		List<Student> studentList = new ArrayList<>();
 		try (Statement statement = connection.createStatement()) {
-			studentList = studentTransformer.transformAll(statement.executeQuery("SELECT * FROM `student`"));
+			studentList = universalTransformer.transformAll(statement.executeQuery("SELECT * FROM `student`"));
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,7 +104,7 @@ public class StudentDao {
 		Student student = new Student();
 		try (PreparedStatement preparedStatement = connection.prepareStatement(readQuery)) {
 			preparedStatement.setInt(1, studentId);
-			student = studentTransformer.transformAll(preparedStatement.executeQuery()).get(0);
+			student = universalTransformer.transformAll(preparedStatement.executeQuery()).get(0);
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,6 +1,6 @@
 package com.epam.lab.app.enums;
 
-public enum MenuCommand {
+public enum MenuCommand implements Command {
 	META(1, "Print metadata"), COURSE(2, "\"Course\" table"), GRADE(3, "\"Grade\" table"), SPECIALITY(4,
 			"\"Speciality\" table"), STUDENT(5,
 					"\"Student\" table"), EXTRA_QUERIES(6, "Extra queries menu (task3)"), EXIT(7, "Exit"), DEFAULT();

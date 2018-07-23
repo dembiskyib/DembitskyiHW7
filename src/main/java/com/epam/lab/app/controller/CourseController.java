@@ -10,8 +10,8 @@ import com.epam.lab.app.service.CourseService;
 
 public class CourseController implements TableController {
 	private static final Logger logger = LogManager.getLogger(CourseController.class);
-	CourseService courseService;
-	Scanner scanner;
+	private CourseService courseService;
+	private Scanner scanner;
 
 	public CourseController() {
 		courseService = new CourseService();

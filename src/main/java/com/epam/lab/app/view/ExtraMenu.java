@@ -1,9 +1,6 @@
 package com.epam.lab.app.view;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,20 +8,18 @@ import org.apache.logging.log4j.Logger;
 import com.epam.lab.app.controller.ExtraController;
 import com.epam.lab.app.enums.ExtraCommand;
 
-public class ExtraMenu {
+public class ExtraMenu extends Menu {
 	private static final Logger logger = LogManager.getLogger(ExtraMenu.class);
-	private Scanner scanner;
 	private ExtraController extraController;
 
 	public ExtraMenu() {
 		extraController = new ExtraController();
-		scanner = new Scanner(System.in);
 	}
 
 	public void createUI() {
 		boolean end = false;
 		while (!end) {
-			printMenu();
+			printMenu(Arrays.asList(ExtraCommand.values()));
 			ExtraCommand command = ExtraCommand.get(scanner.nextInt());
 			switch (command) {
 			case COURSES_BY_SPECIALITY:
@@ -49,10 +44,4 @@ public class ExtraMenu {
 		}
 	}
 
-	private void printMenu() {
-		logger.info("Print:");
-		List<ExtraCommand> extraCommand = Arrays.asList(ExtraCommand.values());
-		extraCommand.stream().filter(command -> Objects.nonNull(command.getDescription()))
-				.forEach(command -> logger.info(command.getNumber() + " - " + command.getDescription()));
-	}
 }

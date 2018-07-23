@@ -14,7 +14,7 @@ import com.epam.lab.app.service.StudentService;
 
 public class ExtraController {
 	private static final Logger logger = LogManager.getLogger(ExtraController.class);
-	Scanner scanner;
+	private Scanner scanner;
 	private CourseService courseService;
 	private GradeService gradeService;
 	private SpecialityService specialityService;

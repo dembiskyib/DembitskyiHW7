@@ -10,7 +10,7 @@ import java.util.List;
 import com.epam.lab.app.dao.CourseDao;
 import com.epam.lab.app.dataBaseInteraction.ConnectionFactory;
 import com.epam.lab.app.model.Course;
-import com.epam.lab.app.transformer.CourseTransformer;
+import com.epam.lab.app.transformer.UniversalTransformer;
 
 public class CourseService {
 	private CourseDao courseDao;
@@ -46,8 +46,8 @@ public class CourseService {
 		try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
 			preparedStatement.setInt(1, specialityId);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			CourseTransformer courseTransformer = new CourseTransformer();
-			courseList = courseTransformer.transformAll(resultSet);
+			UniversalTransformer<Course> universalTransformer = new UniversalTransformer<>();
+			courseList = universalTransformer.transformAll(resultSet);
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

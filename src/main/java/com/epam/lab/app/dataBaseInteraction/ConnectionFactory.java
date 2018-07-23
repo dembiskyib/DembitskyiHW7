@@ -8,7 +8,10 @@ public class ConnectionFactory {
 	public static int portNumber;
 	public static String login;
 	public static String password;
-	public static boolean firstConnection = true;
+	public static boolean firstConnection;
+	static {
+		firstConnection = true;
+	}
 
 	public static Connection getConnection() {
 		Connection connection = null;

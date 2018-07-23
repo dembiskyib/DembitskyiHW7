@@ -9,20 +9,20 @@ import java.util.List;
 
 import com.epam.lab.app.dataBaseInteraction.ConnectionFactory;
 import com.epam.lab.app.model.Speciality;
-import com.epam.lab.app.transformer.SpecialityTransformer;
+import com.epam.lab.app.transformer.UniversalTransformer;
 
 public class SpecialityDao {
-	SpecialityTransformer specialityTransformer;
+	UniversalTransformer<Speciality> universalTransformer;
 
 	public SpecialityDao() {
-		specialityTransformer = new SpecialityTransformer();
+		universalTransformer = new UniversalTransformer<>();
 	}
 
 	public List<Speciality> getAll() {
 		Connection connection = ConnectionFactory.getConnection();
 		List<Speciality> specialityList = new ArrayList<>();
 		try (Statement statement = connection.createStatement()) {
-			specialityList = specialityTransformer.transformAll(statement.executeQuery("SELECT * FROM `speciality`"));
+			specialityList = universalTransformer.transformAll(statement.executeQuery("SELECT * FROM `speciality`"));
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,7 +78,21 @@ public class SpecialityDao {
 		try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
 			preparedStatement.setInt(1, specialityId);
 			preparedStatement.executeQuery();
-			speciality = specialityTransformer.transformAll(preparedStatement.executeQuery()).get(0);
+			speciality = universalTransformer.transformAll(preparedStatement.executeQuery()).get(0);
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return speciality;
+	}
+
+	public Speciality test(int specialityId) {
+		Connection connection = ConnectionFactory.getConnection();
+		String deleteQuery = String.format("SELECT * FROM `speciality` WHERE `specialityId` = ?");
+		Speciality speciality = new Speciality();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+			preparedStatement.setInt(1, specialityId);
+			speciality = universalTransformer.transformAll(preparedStatement.executeQuery()).get(0);
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

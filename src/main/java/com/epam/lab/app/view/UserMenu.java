@@ -2,9 +2,6 @@ package com.epam.lab.app.view;
 
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,9 +14,8 @@ import com.epam.lab.app.controller.StudentController;
 import com.epam.lab.app.dataBaseInteraction.ConnectionFactory;
 import com.epam.lab.app.enums.MenuCommand;
 
-public class UserMenu {
+public class UserMenu extends Menu {
 	private static final Logger logger = LogManager.getLogger(UserMenu.class);
-	private Scanner scanner;
 	private MainController mainController;
 	private TableMenu tableMenu;
 	private ExtraMenu extraMenu;
@@ -27,13 +23,12 @@ public class UserMenu {
 	public UserMenu() {
 		mainController = new MainController();
 		extraMenu = new ExtraMenu();
-		scanner = new Scanner(System.in);
 	}
 
 	public void createUI() {
 		boolean end = false;
 		while (!end) {
-			printMenu();
+			printMenu(Arrays.asList(MenuCommand.values()));
 			MenuCommand command = MenuCommand.get(scanner.nextInt());
 			switch (command) {
 			case META:
@@ -72,12 +67,4 @@ public class UserMenu {
 			}
 		}
 	}
-
-	private void printMenu() {
-		logger.info("Print:");
-		List<MenuCommand> menuCommand = Arrays.asList(MenuCommand.values());
-		menuCommand.stream().filter(command -> Objects.nonNull(command.getDescription()))
-				.forEach(command -> logger.info(command.getNumber() + " - " + command.getDescription()));
-	}
-
 }

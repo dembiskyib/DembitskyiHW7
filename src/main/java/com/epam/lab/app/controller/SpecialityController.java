@@ -10,8 +10,8 @@ import com.epam.lab.app.service.SpecialityService;
 
 public class SpecialityController implements TableController {
 	private static final Logger logger = LogManager.getLogger(SpecialityController.class);
-	SpecialityService specialityService;
-	Scanner scanner;
+	private SpecialityService specialityService;
+	private Scanner scanner;
 
 	public SpecialityController() {
 		specialityService = new SpecialityService();

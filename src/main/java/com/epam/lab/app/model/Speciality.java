@@ -1,8 +1,15 @@
 package com.epam.lab.app.model;
 
+import com.epam.lab.app.annotations.Field;
+import com.epam.lab.app.annotations.Table;
+
+@Table
 public class Speciality {
+	@Field
 	private int specialityId;
+	@Field
 	private String specialityName;
+	@Field
 	private String specialityDescription;
 
 	public Speciality() {

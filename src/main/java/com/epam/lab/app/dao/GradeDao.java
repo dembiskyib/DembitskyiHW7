@@ -9,20 +9,20 @@ import java.util.List;
 
 import com.epam.lab.app.dataBaseInteraction.ConnectionFactory;
 import com.epam.lab.app.model.Grade;
-import com.epam.lab.app.transformer.GradeTransformer;
+import com.epam.lab.app.transformer.UniversalTransformer;
 
 public class GradeDao {
-	GradeTransformer gradeTransformer;
+	UniversalTransformer<Grade> universalTransformer;
 
 	public GradeDao() {
-		gradeTransformer = new GradeTransformer();
+		universalTransformer = new UniversalTransformer<>();
 	}
 
 	public List<Grade> getAll() {
 		Connection connection = ConnectionFactory.getConnection();
 		List<Grade> gradeList = new ArrayList<>();
 		try (Statement statement = connection.createStatement()) {
-			gradeList = gradeTransformer.transformAll(statement.executeQuery("SELECT * FROM `grade`"));
+			gradeList = universalTransformer.transformAll(statement.executeQuery("SELECT * FROM `grade`"));
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class GradeDao {
 		try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
 			preparedStatement.setInt(1, studentId);
 			preparedStatement.setInt(2, courseId);
-			grade = gradeTransformer.transformAll(preparedStatement.executeQuery()).get(0);
+			grade = universalTransformer.transformAll(preparedStatement.executeQuery()).get(0);
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
